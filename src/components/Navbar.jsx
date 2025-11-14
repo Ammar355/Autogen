@@ -1,9 +1,15 @@
 import { Link, useLocation } from 'react-router-dom';
 import { useState } from 'react';
+import { useAuth } from '../context/AuthContext';
+import LoginModal from './LoginModal';
+import RegisterModal from './RegisterModal';
 
 const Navbar = () => {
   const location = useLocation();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [showLogin, setShowLogin] = useState(false);
+  const [showRegister, setShowRegister] = useState(false);
+  const { user, logout, isAuthenticated } = useAuth();
 
   const isActive = (path) => location.pathname === path;
 
@@ -59,6 +65,32 @@ const Navbar = () => {
               <span>🤖</span>
               <span>AutoGenius</span>
             </Link>
+            {isAuthenticated ? (
+              <div className="flex items-center space-x-4">
+                <span className="text-charcoal">Hi, {user?.name}</span>
+                <button
+                  onClick={logout}
+                  className="px-4 py-2 text-charcoal hover:bg-gray-100 rounded-lg transition-colors"
+                >
+                  Logout
+                </button>
+              </div>
+            ) : (
+              <div className="flex items-center space-x-2">
+                <button
+                  onClick={() => setShowLogin(true)}
+                  className="px-4 py-2 text-charcoal hover:bg-gray-100 rounded-lg transition-colors"
+                >
+                  Login
+                </button>
+                <button
+                  onClick={() => setShowRegister(true)}
+                  className="px-4 py-2 bg-electric-blue text-white rounded-lg font-semibold hover:bg-opacity-90 transition-all"
+                >
+                  Sign Up
+                </button>
+              </div>
+            )}
           </div>
 
           {/* Mobile menu button */}
@@ -97,9 +129,51 @@ const Navbar = () => {
             >
               🤖 AutoGenius
             </Link>
+            {isAuthenticated ? (
+              <>
+                <span className="block px-3 py-2 text-charcoal">Hi, {user?.name}</span>
+                <button
+                  onClick={logout}
+                  className="block px-3 py-2 text-charcoal hover:bg-gray-100 rounded-lg w-full text-left"
+                >
+                  Logout
+                </button>
+              </>
+            ) : (
+              <>
+                <button
+                  onClick={() => setShowLogin(true)}
+                  className="block px-3 py-2 text-charcoal hover:bg-gray-100 rounded-lg w-full text-left"
+                >
+                  Login
+                </button>
+                <button
+                  onClick={() => setShowRegister(true)}
+                  className="block px-3 py-2 bg-electric-blue text-white rounded-lg font-semibold text-center"
+                >
+                  Sign Up
+                </button>
+              </>
+            )}
           </div>
         )}
       </div>
+      <LoginModal
+        isOpen={showLogin}
+        onClose={() => setShowLogin(false)}
+        switchToRegister={() => {
+          setShowLogin(false);
+          setShowRegister(true);
+        }}
+      />
+      <RegisterModal
+        isOpen={showRegister}
+        onClose={() => setShowRegister(false)}
+        switchToLogin={() => {
+          setShowRegister(false);
+          setShowLogin(true);
+        }}
+      />
     </nav>
   );
 };
