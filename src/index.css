@@ -1,0 +1,25 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+
+@layer base {
+  body {
+    @apply bg-white text-charcoal font-sans antialiased;
+  }
+}
+
+@layer components {
+  .btn-primary {
+    @apply bg-electric-blue text-white px-6 py-3 rounded-xl font-semibold hover:bg-opacity-90 transition-all duration-200 shadow-soft;
+  }
+  
+  .btn-secondary {
+    @apply bg-white text-navy border-2 border-navy px-6 py-3 rounded-xl font-semibold hover:bg-navy hover:text-white transition-all duration-200;
+  }
+  
+  .card {
+    @apply bg-white rounded-2xl p-6 shadow-soft hover:shadow-medium transition-shadow duration-200;
+  }
+}
