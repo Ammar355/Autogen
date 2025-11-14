@@ -27,3 +27,20 @@ dist-ssr
 .env
 .env.local
 .env.production
+
+# Environment variables
+.env
+backend/.env
+
+# API Keys
+*.key
+
+# Logs
+logs
+*.log
+
+# Runtime data
+pids
+*.pid
+*.seed
+*.pid.lock

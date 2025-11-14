@@ -19,6 +19,7 @@ Complete guide to deploy AutoGen (frontend + backend) to production.
 4. Create a database user
 5. Whitelist your IP address (or use 0.0.0.0/0 for all IPs in development)
 6. Get your connection string: `mongodb+srv://username:password@cluster.mongodb.net/autogen`
+cat .env
 
 ### Option B: Local MongoDB
 
